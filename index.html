@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO Example</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #222; color: #CCCCCC; font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      ul#messages { height: 200px; overflow-y: auto; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #333; color: #DDDDDD; }
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+
+      // SOCKET.IO
+      // Note: Remove the path if you are running this
+      //   from the root of your server
+      var socket = io.connect('http://domain.tld/', {
+        path: '/socket.io-example/socket.io'
+      });
+
+      // form handling
+
+      // submit
+      $('form').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+
+      // receive
+      socket.on('chat message', function(msg){
+        $('#messages').prepend($('<li>').text(msg));
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "apps" : [{
+    "name"        : "breakboard",
+    "script"      : "bin/www",
+    "watch"       : true,
+    "ignore_watch"     : ["*.log"],
+    "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+  }]
+}
